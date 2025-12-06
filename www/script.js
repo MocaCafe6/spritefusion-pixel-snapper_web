@@ -82,7 +82,7 @@ function processWithWasm(bytes) {
     try {
         // Run specific WASM function
         // Note: process_image in main.rs returns Result<Vec<u8>, JsValue>
-        const outputBytes = process_image(bytes, 0); // 0 or null for k_colors = default
+        const outputBytes = process_image(bytes); // Pass undefined to use default config
 
         // Convert Output Bytes to Blob URL
         const blob = new Blob([outputBytes], { type: 'image/png' });
