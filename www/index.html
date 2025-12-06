@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <div class="background-blobs">
         <div class="blob blob-1"></div>
@@ -27,8 +29,13 @@
                 <div class="drop-content">
                     <div class="icon">✨</div>
                     <h2>Drag & Drop Image</h2>
+                    <div class="input-group">
+                        <label for="color-input">Colors (Optional)</label>
+                        <input type="number" id="color-input" class="num-input" placeholder="Auto" min="1" max="256">
+                    </div>
                     <p>Supports PNG, JPG, WebP</p>
-                    <button class="btn-browse" onclick="document.getElementById('file-input').click()">Browse Files</button>
+                    <button class="btn-browse" onclick="document.getElementById('file-input').click()">Browse
+                        Files</button>
                     <input type="file" id="file-input" accept="image/png, image/jpeg, image/webp" hidden>
                 </div>
                 <div class="drop-overlay">Drop to Snap!</div>
@@ -50,7 +57,7 @@
                         <img id="processed-img" src="" alt="Processed">
                     </div>
                 </div>
-                
+
                 <div class="actions">
                     <a id="download-link" class="btn-primary" download="snapped_sprite.png">
                         <span class="btn-icon">⬇️</span> Download
@@ -62,9 +69,14 @@
 
         <footer>
             <p>Powered by Rust & WebAssembly</p>
+            <p style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.7;">
+                MIT License | <a href="https://github.com/Hugo-Dz/spritefusion-pixel-snapper" target="_blank"
+                    style="color: inherit;">Source Code</a>
+            </p>
         </footer>
     </div>
 
     <script type="module" src="script.js"></script>
 </body>
+
 </html>

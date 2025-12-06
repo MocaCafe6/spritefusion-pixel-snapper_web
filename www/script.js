@@ -9,6 +9,7 @@ const originalImg = document.getElementById('original-img');
 const processedImg = document.getElementById('processed-img');
 const downloadLink = document.getElementById('download-link');
 const resetBtn = document.getElementById('reset-btn');
+const colorInput = document.getElementById('color-input');
 
 let wasmLoaded = false;
 
@@ -81,8 +82,15 @@ function handleFile(file) {
 function processWithWasm(bytes) {
     try {
         // Run specific WASM function
+        // Run specific WASM function
+        let kColors = undefined;
+        if (colorInput.value) {
+            const val = parseInt(colorInput.value);
+            if (val > 0) kColors = val;
+        }
+
         // Note: process_image in main.rs returns Result<Vec<u8>, JsValue>
-        const outputBytes = process_image(bytes); // Pass undefined to use default config
+        const outputBytes = kColors ? process_image(bytes, kColors) : process_image(bytes);
 
         // Convert Output Bytes to Blob URL
         const blob = new Blob([outputBytes], { type: 'image/png' });
@@ -108,6 +116,7 @@ resetBtn.addEventListener('click', () => {
     resultArea.classList.add('hidden');
     dropZone.classList.remove('hidden');
     fileInput.value = '';
+    colorInput.value = '';
     processedImg.src = '';
     originalImg.src = '';
 });
