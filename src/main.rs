@@ -136,7 +136,24 @@ fn process_image_bytes_common(input_bytes: &[u8], config: Option<Config>) -> Res
     // Returns bytes for both implementations
     let mut output_bytes = Vec::new();
     let mut cursor = std::io::Cursor::new(&mut output_bytes);
-    output_img
+
+    // Calculate integer scale factor to approximate original width
+    let scale_x = (width as f64 / output_img.width() as f64).round().max(1.0) as u32;
+    let scale_y = (height as f64 / output_img.height() as f64).round().max(1.0) as u32;
+    let scale = scale_x.min(scale_y).max(1);
+
+    let final_img = if scale > 1 {
+        image::imageops::resize(
+            &output_img,
+            output_img.width() * scale,
+            output_img.height() * scale,
+            image::imageops::FilterType::Nearest,
+        )
+    } else {
+        output_img
+    };
+
+    final_img
         .write_to(&mut cursor, image::ImageFormat::Png)
         .map_err(|e| PixelSnapperError::ImageError(e))?;
 
