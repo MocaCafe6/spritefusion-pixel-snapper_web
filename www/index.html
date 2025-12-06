@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprite Fusion Pixel Snapper</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="glass-container">
+        <header>
+            <h1>Pixel Snapper</h1>
+            <p class="subtitle">AI Sprite Fixer & Auto-Upscaler</p>
+        </header>
+
+        <main>
+            <div id="drop-zone" class="drop-zone">
+                <div class="drop-content">
+                    <div class="icon">✨</div>
+                    <h2>Drag & Drop Image</h2>
+                    <p>Supports PNG, JPG, WebP</p>
+                    <button class="btn-browse" onclick="document.getElementById('file-input').click()">Browse Files</button>
+                    <input type="file" id="file-input" accept="image/png, image/jpeg, image/webp" hidden>
+                </div>
+                <div class="drop-overlay">Drop to Snap!</div>
+            </div>
+
+            <div id="loading" class="loading hidden">
+                <div class="spinner"></div>
+                <p>Snapping Pixels...</p>
+            </div>
+
+            <div id="result-area" class="result-area hidden">
+                <div class="preview-container">
+                    <div class="img-wrapper">
+                        <span class="label">Original</span>
+                        <img id="original-img" src="" alt="Original">
+                    </div>
+                    <div class="img-wrapper highlight">
+                        <span class="label">Snapped & Upscaled</span>
+                        <img id="processed-img" src="" alt="Processed">
+                    </div>
+                </div>
+                
+                <div class="actions">
+                    <a id="download-link" class="btn-primary" download="snapped_sprite.png">
+                        <span class="btn-icon">⬇️</span> Download
+                    </a>
+                    <button id="reset-btn" class="btn-secondary">New Image</button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Powered by Rust & WebAssembly</p>
+        </footer>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
